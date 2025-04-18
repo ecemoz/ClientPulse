@@ -2,6 +2,7 @@ package com.yildiz.clientpulse.security;
 
 import io.jsonwebtoken. *;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import java.util.Date;
 
@@ -27,7 +28,7 @@ public class JwtUtil {
         return getClaims(token).getSubject();
     }
 
-    public boolean validateToken(String token) {
+    public boolean validateToken(String token, UserDetails userDetails) {
         try {
             getClaims(token);
             return true;
@@ -36,7 +37,14 @@ public class JwtUtil {
         }
     }
 
-    private Claims getClaims(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+    public Claims getClaims(String token) {
+        try {
+            return Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            throw new MalformedJwtException("Invalid token format", e);
+        }
     }
 }

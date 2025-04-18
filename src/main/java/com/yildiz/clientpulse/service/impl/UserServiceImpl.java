@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
                 .email(request.getEmail())
                 .phone(request.getPhone())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .role(request.getRole())
                 .build();
         userRepository.save(user);
         return jwtUtil.generateToken(user.getEmail());
