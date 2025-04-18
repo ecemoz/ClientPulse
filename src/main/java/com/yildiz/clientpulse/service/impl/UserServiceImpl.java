@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.yildiz.clientpulse.security.JwtUtil;
 
 @Service
 @RequiredArgsConstructor
@@ -31,15 +32,15 @@ public class UserServiceImpl implements UserService {
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .phone(request.getPhone())
-                .password(PasswordEncoder.encode(request.getPassword()))
+                .password(passwordEncoder.encode(request.getPassword()))
                 .build();
         userRepository.save(user);
-        return JwtUtil.generateToken(user.getEmail());
+        return jwtUtil.generateToken(user.getEmail());
     }
 
     @Override
     public String login(LoginRequest request) {
-        authManager.authenticate(
+        authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
         return jwtUtil.generateToken(request.getEmail());
