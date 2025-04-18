@@ -34,4 +34,7 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String phone;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
