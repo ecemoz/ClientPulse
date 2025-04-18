@@ -4,6 +4,7 @@ import com.yildiz.clientpulse.dto.LoginRequest;
 import com.yildiz.clientpulse.dto.RegisterRequest;
 import com.yildiz.clientpulse.models.User;
 import com.yildiz.clientpulse.repository.UserRepository;
+import com.yildiz.clientpulse.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
