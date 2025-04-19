@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class UserActionEvent {
 
     private Long userId;
-    private String actionType;
+    private ActionType actionType;
     private String metadata;
     private LocalDateTime timestamp;
 }

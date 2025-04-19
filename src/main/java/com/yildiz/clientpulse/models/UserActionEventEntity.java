@@ -21,8 +21,9 @@ public class UserActionEventEntity {
 
     private Long userId;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String actionType;
+    private ActionType actionType;
 
     @Column(nullable = false)
     private String metadata;

@@ -41,8 +41,8 @@ public class JwtFilter extends OncePerRequestFilter {
             String email = jwtUtil.extractEmail(token);
             String role = jwtUtil.extractClaim(token, claims -> (String) claims.get("role"));
 
-            System.out.println("📥 JWT'den çözümlenen email: " + email);
-            System.out.println("🔐 JWT'den çözümlenen rol: " + role);
+            System.out.println(" JWT'den çözümlenen email: " + email);
+            System.out.println(" JWT'den çözümlenen rol: " + role);
 
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(email);
@@ -55,9 +55,9 @@ public class JwtFilter extends OncePerRequestFilter {
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authToken);
 
-                    System.out.println("✅ SecurityContext'e ROLE_" + role + " yetkisi ile authentication atandı.");
+                    System.out.println("SecurityContext'e ROLE_" + role + " yetkisi ile authentication atandı.");
                 } else {
-                    System.out.println("❌ Token doğrulanamadı.");
+                    System.out.println("Token doğrulanamadı.");
                 }
             }
         } catch (MalformedJwtException e) {
