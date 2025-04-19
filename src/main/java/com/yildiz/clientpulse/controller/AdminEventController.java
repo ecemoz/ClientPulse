@@ -3,10 +3,9 @@ package com.yildiz.clientpulse.controller;
 import com.yildiz.clientpulse.models.UserActionEventEntity;
 import com.yildiz.clientpulse.service.UserActionEventService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/events")
@@ -25,5 +24,10 @@ public class AdminEventController {
             return eventService.getEventsByUserId(userId);
         }
         return eventService.getAllEvents();
+    }
+
+    @GetMapping("/stats")
+    public Map<String, Long> getEventStats() {
+        return eventService.getEventStats();
     }
 }

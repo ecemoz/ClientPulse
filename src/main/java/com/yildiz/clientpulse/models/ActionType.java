@@ -1,5 +1,9 @@
 package com.yildiz.clientpulse.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+import java.util.Locale;
+
 public enum ActionType {
     LOGIN,
     LOGOUT,
@@ -9,5 +13,10 @@ public enum ActionType {
     VIEW_PAGE,
     UPDATE_PROFILE,
     DELETE_ACCOUNT,
-    CLICK
+    CLICK;
+
+    @JsonCreator
+    public static ActionType fromString(String value) {
+        return ActionType.valueOf(value.toUpperCase(Locale.ROOT));
+    }
 }
