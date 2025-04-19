@@ -220,5 +220,4 @@ public class CustomerProfile {
 2. Kullanıcıya ait churn ve loyalty skorlarını güncelleyerek müşteri segmentini belirleyin.
 
 ---
-
-Bu README dosyasının, tüm temel uygulama adımlarını ve API kullanımını açıklayan, verimli bir rehber olmasını sağlayacaktır.
+Tüm hakları saklıdır...
