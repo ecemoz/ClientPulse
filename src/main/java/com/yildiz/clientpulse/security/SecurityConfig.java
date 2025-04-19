@@ -25,6 +25,7 @@ public class SecurityConfig {
         http
                 .securityMatcher("/**") // tüm istekler için geçerli
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/admin/**").permitAll()
                         .requestMatchers("/auth/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 )

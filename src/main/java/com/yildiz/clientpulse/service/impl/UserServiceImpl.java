@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
                 .role(request.getRole())
                 .build();
         userRepository.save(user);
-        return jwtUtil.generateToken(user.getEmail());
+        return jwtUtil.generateToken(user.getEmail(), user.getRole().name());
     }
 
     @Override
@@ -44,7 +44,9 @@ public class UserServiceImpl implements UserService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
-        return jwtUtil.generateToken(request.getEmail());
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return jwtUtil.generateToken(user.getEmail(), user.getRole().name());
     }
 
     @Override
