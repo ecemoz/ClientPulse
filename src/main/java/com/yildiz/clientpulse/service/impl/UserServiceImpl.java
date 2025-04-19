@@ -2,7 +2,9 @@ package com.yildiz.clientpulse.service.impl;
 
 import com.yildiz.clientpulse.dto.LoginRequest;
 import com.yildiz.clientpulse.dto.RegisterRequest;
+import com.yildiz.clientpulse.models.CustomerProfile;
 import com.yildiz.clientpulse.models.User;
+import com.yildiz.clientpulse.repository.CustomerProfileRepository;
 import com.yildiz.clientpulse.repository.UserRepository;
 import com.yildiz.clientpulse.service.CustomerProfileService;
 import com.yildiz.clientpulse.service.UserService;
@@ -25,6 +27,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final CustomerProfileService customerProfileService;
+    private final CustomerProfileRepository customerProfileRepository;
 
 
     @Override
