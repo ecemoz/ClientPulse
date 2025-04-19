@@ -1,11 +1,12 @@
 package com.yildiz.clientpulse.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "customer_profiles")
+@Table(name = "customer_profile")
 @Data
 public class CustomerProfile {
 
@@ -13,6 +14,7 @@ public class CustomerProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

@@ -4,6 +4,7 @@ import com.yildiz.clientpulse.dto.LoginRequest;
 import com.yildiz.clientpulse.dto.RegisterRequest;
 import com.yildiz.clientpulse.models.User;
 import com.yildiz.clientpulse.repository.UserRepository;
+import com.yildiz.clientpulse.service.CustomerProfileService;
 import com.yildiz.clientpulse.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,8 @@ public class UserServiceImpl implements UserService {
     private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final CustomerProfileService customerProfileService;
+
 
     @Override
     public String register(RegisterRequest request) {
@@ -36,6 +39,7 @@ public class UserServiceImpl implements UserService {
                 .role(request.getRole())
                 .build();
         userRepository.save(user);
+        customerProfileService.createProfileForUser(user);
         return jwtUtil.generateToken(user.getEmail(), user.getRole().name());
     }
 

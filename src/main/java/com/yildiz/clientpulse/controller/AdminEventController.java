@@ -1,6 +1,8 @@
 package com.yildiz.clientpulse.controller;
 
+import com.yildiz.clientpulse.models.CustomerProfile;
 import com.yildiz.clientpulse.models.UserActionEventEntity;
+import com.yildiz.clientpulse.service.CustomerProfileService;
 import com.yildiz.clientpulse.service.UserActionEventService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,11 @@ import java.util.Map;
 public class AdminEventController {
 
     private final UserActionEventService eventService;
+    private final CustomerProfileService customerProfileService;
 
-    public AdminEventController(UserActionEventService eventService) {
+    public AdminEventController(UserActionEventService eventService, CustomerProfileService customerProfileService) {
         this.eventService = eventService;
+        this.customerProfileService = customerProfileService;
     }
 
     @GetMapping
@@ -29,5 +33,10 @@ public class AdminEventController {
     @GetMapping("/stats")
     public Map<String, Long> getEventStats() {
         return eventService.getEventStats();
+    }
+
+    @GetMapping("/customers")
+    public List<CustomerProfile> getAllCustomers() {
+        return customerProfileService.getAllProfiles();
     }
 }

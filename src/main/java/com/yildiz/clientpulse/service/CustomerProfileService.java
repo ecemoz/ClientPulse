@@ -2,6 +2,7 @@ package com.yildiz.clientpulse.service;
 
 import com.yildiz.clientpulse.models.CustomerProfile;
 import com.yildiz.clientpulse.models.User;
+
 import java.util.List;
 
 public interface CustomerProfileService {
